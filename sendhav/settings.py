@@ -50,10 +50,7 @@ INSTALLED_APPS = [
     'users',
     'rest_framework.authtoken',
 
-    'rest_auth',
-    
-    'social_django',  # django social auth
-    'rest_social_auth',
+    # 'social_django',  # django social auth
 ]
 
 MIDDLEWARE = [
@@ -65,12 +62,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.facebook.FacebookOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -93,6 +84,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # for social-auth
+                # 'social_django.context_processors.backends',
+                # 'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -162,13 +157,62 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_USER_EMAIL_FIELD = 'email'
-
 AUTH_USER_MODEL = "users.CustomUser" 
 
-SITE_ID = 2
+
+# --------------------------SOCIAL AUTH------------------------
+
+# AUTHENTICATION_BACKENDS = (
+#     'social_core.backends.facebook.FacebookOAuth2',
+#     'social_core.backends.github.GithubOAuth2',
+#     'django.contrib.auth.backends.ModelBackend',
+# )
+
+# SOCIAL_AUTH_PIPELINE = (
+#     'social_core.pipeline.social_auth.social_details',
+#     'social_core.pipeline.social_auth.social_uid',
+#     'social_core.pipeline.social_auth.auth_allowed',
+#     'social_core.pipeline.social_auth.social_user',
+
+#     # Make up a username for this person, appends a random string at the end if
+#     # there's any collision.
+#     # 'social_core.pipeline.user.get_username',
+
+#     # # CUSTOM: this gets email address as the username and validates it matches
+#     # # the logged in user's email address.
+#     # 'users.pipeline.get_username',
+
+#     # 'social_core.pipeline.mail.mail_validation',
+#     'social_core.pipeline.social_auth.associate_by_email',
+#     'social_core.pipeline.user.create_user',
+#     'social_core.pipeline.social_auth.associate_user',
+#     'social_core.pipeline.social_auth.load_extra_data',
+#     'social_core.pipeline.user.user_details'
+# )
+
+
+# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+# SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+#     'fields': 'id, name, email',
+# }
+
+# SOCIAL_AUTH_GITHUB_SCOPE = ['email']
+# SOCIAL_AUTH_GITHUB_PROFILE_EXTRA_PARAMS = {
+#     'fields': 'id, name, email',
+# }
+
+
+# SOCIAL_AUTH_USER_MODEL = "users.CustomUser"
+
+# # SITE_ID = 2
+
+# SOCIAL_AUTH_FACEBOOK_KEY = '1166378263832208'
+# SOCIAL_AUTH_FACEBOOK_SECRET = '8853c3e2ea2ee2335f6d299ff48d944a'
+
+
+# SOCIAL_AUTH_GITHUB_KEY = '9ca07d915492f4a649ec'
+# SOCIAL_AUTH_GITHUB_SECRET = '5bd9b9ff3c141ed1f14d1da345b481dae30f13a9'
+
+# LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/'
+

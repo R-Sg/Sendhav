@@ -7,9 +7,12 @@ from rest_framework.response import Response
 
 from . import serializers
 from .utils import get_and_authenticate_user, create_user_account
+from django.shortcuts import render
 
 User = get_user_model()
 
+# def Home(request):
+#     return render(request, "home.html", {})
 
 class AuthViewSet(viewsets.GenericViewSet):
     permission_classes = [AllowAny, ]
